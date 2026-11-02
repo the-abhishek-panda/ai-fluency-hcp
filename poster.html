@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#0f1d24">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The AI Fluency Framework for Healthcare Professionals: Poster</title>
+<style>
+html,body{margin:0;height:100%;background:#0f1d24}
+body{display:grid;place-items:center;overflow:auto}
+svg{display:block;width:100%;max-width:calc(100dvh * .6383);height:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;fill:#e8f0f2}
+.s{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+.m{fill:#9db0b6}
+.n{opacity:.6;animation:act 16s linear infinite;animation-delay:var(--d)}
+.c{opacity:0;animation:cen 16s linear infinite;animation-delay:var(--d)}
+@keyframes act{0%{opacity:.6}3%,22%{opacity:1}28%,100%{opacity:.6}}
+@keyframes cen{0%{opacity:0}3%,21%{opacity:1}25%,100%{opacity:0}}
+#ring{stroke-dasharray:100;animation:draw 2.4s ease-out both}
+@keyframes draw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.still{display:none}
+.paused *{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){
+ .n{animation:none;opacity:1}.c,#pulse{display:none}.still{display:block}#ring{animation:none}}
+</style>
+</head>
+<body>
+<svg id="p" viewBox="0 0 600 940" role="img" aria-labelledby="t d">
+<title id="t">The AI Fluency Framework for Healthcare Professionals</title>
+<desc id="d">A cycle of four competencies: Delegation (decide what AI should do), Description (explain what you need), Discernment (check what AI gives you), Diligence (own the outcome).</desc>
+<defs><radialGradient id="g"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+<rect width="600" height="940" fill="#0f1d24"/>
+
+<text x="300" y="72" text-anchor="middle" class="s" font-size="42" font-weight="700">The AI Fluency Framework</text>
+<text x="300" y="112" text-anchor="middle" class="s" font-size="28">for Healthcare Professionals</text>
+<text x="300" y="150" text-anchor="middle" class="m" font-size="19">Working with AI effectively, efficiently, ethically and safely</text>
+
+<path id="ring" pathLength="100" d="M300 260A170 170 0 0 1 300 600A170 170 0 0 1 300 260" fill="none" stroke="#2c4048" stroke-width="6"/>
+
+<rect x="228" y="238" width="144" height="44" rx="22" fill="#0f1d24"/><rect x="398" y="408" width="144" height="44" rx="22" fill="#0f1d24"/><rect x="228" y="578" width="144" height="44" rx="22" fill="#0f1d24"/><rect x="58" y="408" width="144" height="44" rx="22" fill="#0f1d24"/>
+<g class="n" style="--d:0s"><rect x="228" y="238" width="144" height="44" rx="22" fill="#8d9bff"/><text x="300" y="267" text-anchor="middle" font-size="18" font-weight="700" style="fill:#0f1d24">Delegation</text></g>
+<g class="n" style="--d:-12s"><rect x="398" y="408" width="144" height="44" rx="22" fill="#4fd1c0"/><text x="470" y="437" text-anchor="middle" font-size="18" font-weight="700" style="fill:#0f1d24">Description</text></g>
+<g class="n" style="--d:-8s"><rect x="228" y="578" width="144" height="44" rx="22" fill="#f0b04a"/><text x="300" y="607" text-anchor="middle" font-size="18" font-weight="700" style="fill:#0f1d24">Discernment</text></g>
+<g class="n" style="--d:-4s"><rect x="58" y="408" width="144" height="44" rx="22" fill="#ff8da1"/><text x="130" y="437" text-anchor="middle" font-size="18" font-weight="700" style="fill:#0f1d24">Diligence</text></g>
+
+<g class="c" style="--d:0s"><text x="300" y="430" text-anchor="middle" class="s" font-size="44" font-weight="700" style="fill:#8d9bff">Decide</text><text x="300" y="465" text-anchor="middle" font-size="20">what AI should do</text></g>
+<g class="c" style="--d:-12s"><text x="300" y="430" text-anchor="middle" class="s" font-size="44" font-weight="700" style="fill:#4fd1c0">Explain</text><text x="300" y="465" text-anchor="middle" font-size="20">what you need</text></g>
+<g class="c" style="--d:-8s"><text x="300" y="430" text-anchor="middle" class="s" font-size="44" font-weight="700" style="fill:#f0b04a">Check</text><text x="300" y="465" text-anchor="middle" font-size="20">what AI gives you</text></g>
+<g class="c" style="--d:-4s"><text x="300" y="430" text-anchor="middle" class="s" font-size="44" font-weight="700" style="fill:#ff8da1">Own</text><text x="300" y="465" text-anchor="middle" font-size="20">the outcome</text></g>
+<g class="still"><text x="300" y="430" text-anchor="middle" class="s" font-size="34" font-weight="700">Decide, explain,</text><text x="300" y="470" text-anchor="middle" class="s" font-size="34" font-weight="700">check, own</text></g>
+
+<g id="pulse"><circle r="22" fill="url(#g)"><animateMotion dur="16s" repeatCount="indefinite"><mpath href="#ring"/></animateMotion></circle><circle r="7" fill="#fff"><animateMotion dur="16s" repeatCount="indefinite"><mpath href="#ring"/></animateMotion></circle></g>
+
+<g>
+<rect x="30" y="652" width="265" height="94" rx="12" fill="#17262d" stroke="#8d9bff" stroke-width="2"/>
+<text x="46" y="684" font-size="19" font-weight="700" style="fill:#8d9bff">Delegation</text><text x="46" y="713" font-size="17">Problem, platform and</text><text x="46" y="735" font-size="17">task awareness</text>
+<rect x="305" y="652" width="265" height="94" rx="12" fill="#17262d" stroke="#4fd1c0" stroke-width="2"/>
+<text x="321" y="684" font-size="19" font-weight="700" style="fill:#4fd1c0">Description</text><text x="321" y="713" font-size="17">Product, process and</text><text x="321" y="735" font-size="17">performance</text>
+<rect x="30" y="758" width="265" height="94" rx="12" fill="#17262d" stroke="#f0b04a" stroke-width="2"/>
+<text x="46" y="790" font-size="19" font-weight="700" style="fill:#f0b04a">Discernment</text><text x="46" y="819" font-size="17">Judge the product, the</text><text x="46" y="841" font-size="17">process and the behaviour</text>
+<rect x="305" y="758" width="265" height="94" rx="12" fill="#17262d" stroke="#ff8da1" stroke-width="2"/>
+<text x="321" y="790" font-size="19" font-weight="700" style="fill:#ff8da1">Diligence</text><text x="321" y="819" font-size="17">Creation, transparency</text><text x="321" y="841" font-size="17">and deployment</text>
+</g>
+
+<text x="300" y="884" text-anchor="middle" font-size="17">Modes: automation, augmentation, agency</text>
+<text x="300" y="908" text-anchor="middle" class="m" font-size="14">Framework by Rick Dakan and Joseph Feller, aifluencyframework.org</text>
+<text x="300" y="927" text-anchor="middle" class="m" font-size="14">CC BY-NC-SA 4.0. Unofficial summary.</text>
+</svg>
+<script>
+(function(){var s=document.getElementById('p'),on=false;
+s.addEventListener('click',function(){on=!on;document.body.classList.toggle('paused',on);try{on?s.pauseAnimations():s.unpauseAnimations()}catch(e){}});})();
+</script>
+</body>
+</html>
