@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="An interactive explainer of the AI Fluency Framework (the 4Ds) for healthcare professionals from all specialities.">
+<title>The AI Fluency Framework for Healthcare Professionals</title>
+<style>
+:root{--bg:#f1f5f4;--card:#fff;--ink:#14252d;--mute:#4d6068;--line:#cfdad8;--c1:#3646a8;--c2:#0b7a70;--c3:#9a5a00;--c4:#a82f48;--ok:#17703a;--bad:#a82f48;--acc:var(--c1);--r:14px;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1a1f;--card:#17262d;--ink:#e6eef0;--mute:#9db0b6;--line:#2c4048;--c1:#8d9bff;--c2:#4fd1c0;--c3:#f0b04a;--c4:#ff8da1;--ok:#5fd68c;--bad:#ff8da1}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.6 var(--sans);padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.w{max-width:46rem;margin:0 auto;padding:0 1.1rem}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0 0 .6rem}
+h1{font-size:clamp(1.9rem,7vw,3rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.4rem,5vw,1.9rem);margin-top:0}
+h3{font-size:1.15rem}
+p{margin:.3rem 0 .9rem;max-width:62ch}
+section{padding:2.2rem 0;border-top:1px solid var(--line)}
+a{color:var(--c1)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:6px}
+button,textarea{font:inherit;color:inherit}
+button{cursor:pointer;min-height:44px}
+.skip{position:absolute;left:-99px}.skip:focus{left:8px;top:8px;background:var(--card);padding:.5rem;z-index:9}
+header{padding:2.2rem 0 1.4rem}
+.lead{font-size:1.1rem;color:var(--mute)}
+.def{font-family:var(--serif);font-size:1.15rem;border-left:5px solid var(--c1);padding:.2rem 0 .2rem 1rem;margin:1rem 0}
+.chain{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:1.2rem 0}
+@media (min-width:600px){.chain{grid-template-columns:repeat(4,1fr)}}
+.chain button{border:2px solid var(--k);background:var(--card);border-radius:var(--r);padding:.7rem .6rem;text-align:left;border-left-width:8px}
+.chain b{display:block;font-family:var(--serif);font-size:1.1rem;color:var(--k)}
+.chain span{font-size:.85rem;color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.1rem;margin:.8rem 0}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:.8rem 0}
+.tabs button{border:2px solid var(--line);background:var(--card);border-radius:99px;padding:.3rem 1rem}
+.tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.tabs button[aria-selected=true]{color:#0f1a1f}}
+details{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--acc);border-radius:10px;margin:.6rem 0}
+summary{padding:.8rem 1rem;cursor:pointer;font-weight:600;min-height:44px}
+details>div{padding:0 1rem .8rem}
+.ask{background:color-mix(in srgb,var(--acc) 12%,transparent);border-radius:10px;padding:.7rem 1rem;margin-top:.8rem}
+.ex{color:var(--mute);font-size:.95rem}
+.opts{display:grid;gap:.5rem;margin:.6rem 0}
+@media (min-width:600px){.opts{grid-template-columns:repeat(3,1fr)}}
+.opts button,.btn{border:2px solid var(--line);background:var(--card);border-radius:10px;padding:.5rem .8rem;text-align:left}
+.btn{background:var(--c1);border-color:var(--c1);color:#fff;font-weight:600}
+@media (prefers-color-scheme:dark){.btn{color:#0f1a1f}}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--line)}
+.opts button.pick{border-color:var(--c1);background:color-mix(in srgb,var(--c1) 14%,transparent)}
+.fb{margin-top:.6rem;padding:.7rem 1rem;border-radius:10px;background:color-mix(in srgb,var(--ok) 13%,transparent)}
+.fb.no{background:color-mix(in srgb,var(--c3) 15%,transparent)}
+label{display:block;font-weight:600;margin:.8rem 0 .2rem}
+textarea{width:100%;min-height:5rem;border:2px solid var(--line);border-radius:10px;background:var(--card);padding:.6rem;resize:vertical}
+.out{white-space:pre-wrap;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:.8rem;font-size:.95rem;margin-top:.8rem}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+.ai{font-family:var(--serif);font-size:1.05rem}
+.ai button{display:block;width:100%;text-align:left;border:2px solid transparent;background:transparent;border-radius:8px;padding:.5rem .6rem;margin:.2rem 0;font-family:inherit}
+.ai button[aria-pressed=true]{border-color:var(--c3);background:color-mix(in srgb,var(--c3) 15%,transparent)}
+.ai button.right{border-color:var(--ok)}.ai button.miss{border-color:var(--bad);border-style:dashed}
+.chk{display:flex;gap:.7rem;align-items:flex-start;font-weight:400;margin:.2rem 0;padding:.5rem 0}
+.chk input{width:1.4rem;height:1.4rem;margin-top:.15rem;flex:none;accent-color:var(--c4)}
+.bar{height:10px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--c2);transition:width .3s}
+.note{font-size:.88rem;color:var(--mute)}
+footer{padding:2rem 0 3rem;border-top:1px solid var(--line);font-size:.9rem;color:var(--mute)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="w">
+<h1>The AI Fluency Framework for Healthcare Professionals</h1>
+<p class="lead">A 15-minute interactive explainer for clinicians, public health, nursing, pharmacy, laboratory and allied colleagues. No technical background needed. Works offline.</p>
+<p class="def">AI fluency is the ability to work with AI effectively, efficiently, ethically and safely.</p>
+<p class="note">The framework was developed by Prof Rick Dakan and Prof Joseph Feller. This page is an unofficial teaching summary with healthcare examples.</p>
+</header>
+
+<main id="main" class="w">
+<section>
+<h2>The four competencies: the 4Ds</h2>
+<p>Tap a D to jump to it. A simple way to remember the order: <b>Decide, Explain, Check, Own.</b></p>
+<div class="chain" id="chain"></div>
+</section>
+
+<section>
+<h2>Three ways of working with AI</h2>
+<p>The framework describes three modes of human–AI interaction. Fluency includes choosing the right mode for the task.</p>
+<div class="tabs" role="tablist" id="modeTabs" aria-label="Modes of interaction"></div>
+<div class="card" id="modeBody" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<section id="fourD">
+<h2>Inside each D</h2>
+<p>Each competency has three sub-skills. Open them one at a time.</p>
+<div class="tabs" role="tablist" id="dTabs" aria-label="The four Ds"></div>
+<div id="dBody" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<section id="try">
+<h2>Try it</h2>
+
+<h3 style="color:var(--c1)">1. Delegation: who should do this task?</h3>
+<p>For each task, choose how you would work. There is often more than one defensible answer, so read the reasoning.</p>
+<div id="sorter"></div>
+
+<h3 style="color:var(--c2);margin-top:2rem">2. Description: build a better prompt</h3>
+<p>Describe the <b>product</b> (what you want), the <b>process</b> (how to get there) and the <b>performance</b> (how the AI should behave).</p>
+<div class="card">
+<label for="p1">Product: what output do you need?</label>
+<textarea id="p1" placeholder="e.g. A one-page leaflet on dengue warning signs for village health workers"></textarea>
+<label for="p2">Process: how should it work?</label>
+<textarea id="p2" placeholder="e.g. Ask me 3 questions first. Use simple words. Say what you are unsure about."></textarea>
+<label for="p3">Performance: how should it behave?</label>
+<textarea id="p3" placeholder="e.g. Act as a critical colleague. Do not just agree with me."></textarea>
+<div class="row"><button class="btn alt" id="ex">Fill an example</button><button class="btn" id="cp">Copy prompt</button></div>
+<div class="bar" style="margin-top:.8rem" aria-hidden="true"><i id="pbar"></i></div>
+<div class="out" id="pout" aria-live="polite">Your combined prompt appears here.</div>
+<p class="note" id="pnote">Never paste patient names, ID numbers or other identifying details into a public AI tool.</p>
+</div>
+
+<h3 style="color:var(--c3);margin-top:2rem">3. Discernment: spot what is wrong</h3>
+<p>An AI assistant answered: <i>"How should a child with acute watery diarrhoea be managed?"</i> Tap every sentence you would <b>not</b> accept without checking, then press Check.</p>
+<div class="card ai" id="spot"></div>
+<div class="row"><button class="btn" id="chk">Check my answer</button></div>
+<div id="spotFb"></div>
+
+<h3 style="color:var(--c4);margin-top:2rem">4. Diligence: your personal AI-use commitments</h3>
+<p>Tick the commitments you will make. Your choices are saved on this device only.</p>
+<div class="card" id="pledge"></div>
+</section>
+</main>
+
+<footer class="w">
+<p><b>Educational use only.</b> The clinical example above is simplified for teaching. It is not clinical guidance; always verify against current national or WHO guidelines and your institution's policies.</p>
+<p>Source: <a href="https://aifluencyframework.org/" rel="noopener">aifluencyframework.org</a> (links need an internet connection). The AI Fluency Framework is by Rick Dakan (Ringling College of Art and Design) and Joseph Feller (University College Cork); the open courses were produced with Anthropic under CC BY-NC-SA 4.0. This unofficial summary is shared under the same licence.</p>
+</footer>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var K=['--c1','--c2','--c3','--c4'];
+var D=[
+{n:'Delegation',s:'Decide what AI should do',a:'Like triage: you decide who or what handles each case before treatment begins.',
+ q:'If this goes wrong, who is harmed, and could I tell?',
+ sub:[['Problem awareness','Be clear about the goal and the work involved before you touch any tool.','Before asking for "a summary", define who will read it and for what decision.'],
+ ['Platform awareness','Know what different AI tools can and cannot do, including their limits and risks for health data.','A general chatbot may sound confident about drug doses but cannot see your formulary.'],
+ ['Task delegation','Split the work between you and AI so each does what it does best.','AI drafts the outbreak line-list table; you judge what the pattern means.']]},
+{n:'Description',s:'Explain what you need',a:'Like a good handover: the next person can only act on what you clearly tell them.',
+ q:'Could a smart new colleague act on this message without asking me anything?',
+ sub:[['Product description','Say what you want: format, audience, length, purpose.','"Half-page, Class 8 reading level, for mothers of under-fives."'],
+ ['Process description','Say how to approach it: steps, questions to ask first, what to flag.','"List your assumptions first. Mark anything you are unsure of."'],
+ ['Performance description','Say how the AI should behave: its role and style of interaction.','"Be a sceptical reviewer, not a cheerleader."']]},
+{n:'Discernment',s:'Check what AI gives you',a:'Like reviewing a junior colleague\u2019s note: confident writing is not the same as correct content.',
+ q:'What would I need to see to believe this is true?',
+ sub:[['Product discernment','Judge the output: accurate, relevant, complete, appropriate?','Check doses, numbers and references against a trusted source.'],
+ ['Process discernment','Judge the reasoning: logical gaps, invented steps, skipped caveats.','Does the argument jump from one study to a population-wide claim?'],
+ ['Performance discernment','Judge the interaction: did the AI listen, stay in role, and respond to feedback?','If you asked for a critical review and it only praised you, say so and adjust.']]},
+{n:'Diligence',s:'Own the outcome',a:'Like signing an order or a certificate: your name goes on it, whatever helped you write it.',
+ q:'Would I be comfortable explaining exactly how this was made to a patient or regulator?',
+ sub:[['Creation diligence','Choose tools and approaches thoughtfully, including privacy and data risks.','Use only approved tools for anything that touches patient information.'],
+ ['Transparency diligence','Be honest with the people who need to know that AI was involved.','Disclose AI help in manuscripts, teaching material and audits as policy requires.'],
+ ['Deployment diligence','Verify before you share, and take responsibility for what you release.','Read every line of an AI-drafted discharge summary before signing.']]}];
+var M=[
+{n:'Automation',t:'You give a defined task and the AI carries it out the way you specified.',e:'Reformatting a messy spreadsheet of immunisation records into a standard layout.'},
+{n:'Augmentation',t:'You and the AI think together, going back and forth, each contributing.',e:'Discussing a differential diagnosis, a study design or a lesson plan, challenging each other\u2019s ideas.'},
+{n:'Agency',t:'You set up an AI to work independently on later tasks on your behalf, within rules you configure.',e:'An assistant that sorts routine incoming reports and flags unusual ones for you. It needs strong ongoing checks.'}];
+
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function tabs(box,items,fn,labelFn){items.forEach(function(it,i){var b=el('button','',labelFn(it,i));b.setAttribute('role','tab');b.onclick=function(){sel(i)};box.appendChild(b)});
+ function sel(i){[].forEach.call(box.children,function(b,j){b.setAttribute('aria-selected',j==i)});fn(i)}return sel}
+
+/* chain */
+var ch=$('#chain');
+D.forEach(function(d,i){var b=el('button','','<b>'+d.n+'</b><span>'+d.s+'</span>');b.style.setProperty('--k','var('+K[i]+')');
+ b.onclick=function(){selD(i);$('#fourD').scrollIntoView()};ch.appendChild(b)});
+
+/* modes */
+var selM=tabs($('#modeTabs'),M,function(i){$('#modeBody').innerHTML='<h3>'+M[i].n+'</h3><p>'+M[i].t+'</p><p class="ex"><b>Example:</b> '+M[i].e+'</p>'},function(m){return m.n});
+selM(1);
+
+/* Ds */
+var selD=tabs($('#dTabs'),D,function(i){var d=D[i],b=$('#dBody');b.style.setProperty('--acc','var('+K[i]+')');
+ b.innerHTML='<div class="card" style="border-left:6px solid var(--acc)"><h3>'+d.n+': '+d.s.toLowerCase()+'</h3><p>'+d.a+'</p></div>';
+ d.sub.forEach(function(s,j){var x=el('details','','<summary>'+s[0]+'</summary><div><p>'+s[1]+'</p><p class="ex"><b>Health example:</b> '+s[2]+'</p></div>');if(j==0)x.open=true;b.appendChild(x)});
+ b.appendChild(el('div','ask','<b>Ask yourself:</b> '+d.q));
+ var main=document.getElementById('dTabs');var colour='var('+K[i]+')';[].forEach.call(main.children,function(t){t.style.setProperty('--acc',colour)})},function(d){return d.n});
+selD(0);
+
+/* sorter */
+var T=[
+{t:'Write a patient leaflet on hypertension in a local language.',b:1,w:'Best as augmentation: AI can draft quickly, but a fluent speaker must check wording, tone and medical accuracy.'},
+{t:'Decide the chemotherapy dose for a specific patient.',b:0,w:'Keep this human-led. A high-stakes, patient-specific decision needs your clinical judgement and verified protocols. AI may help double-check, never decide.'},
+{t:'Convert 300 free-text register entries into a clean table (no patient names).',b:2,w:'Good for automation with clear instructions, as long as you audit a sample and totals afterwards. The task is well defined and the outputs are checkable.'},
+{t:'Break bad news to a patient\u2019s family.',b:0,w:'Keep this human. Empathy, presence and accountability cannot be handed over. AI might help you prepare, but not replace the conversation.'}];
+var sb=$('#sorter'),O=['Do it myself','Work with AI, I check','Let AI do it, I audit'];
+T.forEach(function(q){var c=el('div','card','<b>'+q.t+'</b>'),o=el('div','opts'),f=el('div');
+ O.forEach(function(x,i){var b=el('button','',x);b.onclick=function(){[].forEach.call(o.children,function(y){y.classList.remove('pick')});b.classList.add('pick');
+  f.className='fb'+(i==q.b?'':' no');f.setAttribute('role','status');f.innerHTML=(i==q.b?'<b>Reasonable choice.</b> ':'<b>Consider again.</b> ')+q.w;};o.appendChild(b)});
+ c.appendChild(o);c.appendChild(f);sb.appendChild(c)});
+
+/* prompt builder */
+var P=[$('#p1'),$('#p2'),$('#p3')];
+function upd(){var v=P.map(function(p){return p.value.trim()}),n=v.filter(Boolean).length;
+ $('#pbar').style.width=(n/3*100)+'%';
+ $('#pout').textContent=n?[v[0]&&'TASK: '+v[0],v[1]&&'HOW TO WORK: '+v[1],v[2]&&'YOUR ROLE: '+v[2]].filter(Boolean).join('\n\n'):'Your combined prompt appears here.';
+ $('#pnote').textContent=n==3?'All three parts covered. Remember: you still need to check the output (Discernment).':'Never paste patient names, ID numbers or other identifying details into a public AI tool.'}
+P.forEach(function(p){p.addEventListener('input',upd)});
+$('#ex').onclick=function(){P[0].value='A one-page leaflet on dengue warning signs for village health workers, at a Class 8 reading level.';P[1].value='Ask me three questions first. List your assumptions. Mark anything you are unsure about.';P[2].value='Act as a critical public health colleague. Challenge my assumptions rather than agreeing.';upd()};
+$('#cp').onclick=function(){var t=$('#pout').textContent,b=$('#cp');
+ function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy prompt'},1500)}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){})}else{var r=document.createRange();r.selectNodeContents($('#pout'));var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');done()}catch(e){}}};
+
+/* spot the error */
+var S=[['For rehydration, use low-osmolarity ORS.',0],['Give zinc 50 mg daily for 3 days to all children.',1],['Prescribe an antibiotic for every child with watery diarrhoea.',1],['Continue breastfeeding and normal feeding during the illness.',0],['This is supported by Sharma et al., Lancet 2019;393:1123.',1]];
+var W=['','Zinc dose is wrong: the usual recommendation is 20 mg/day for 10\u201314 days (10 mg/day under 6 months).','Antibiotics are generally not indicated for watery diarrhoea; they are reserved for specific situations such as bloody diarrhoea or suspected cholera.','','This citation cannot be verified from the text. AI can invent plausible references, so look it up yourself before trusting it.'];
+var sp=$('#spot');
+S.forEach(function(s){var b=el('button','',s[0]);b.setAttribute('aria-pressed','false');b.onclick=function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!='true')};sp.appendChild(b)});
+$('#chk').onclick=function(){var hit=0,miss=0,fp=0,li='';
+ [].forEach.call(sp.children,function(b,i){var on=b.getAttribute('aria-pressed')=='true',bad=S[i][1];b.classList.remove('right','miss');
+  if(on&&bad){hit++;b.classList.add('right')}else if(!on&&bad){miss++;b.classList.add('miss')}else if(on&&!bad){fp++}
+  if(bad)li+='<li>'+W[i]+'</li>'});
+ var f=$('#spotFb');f.className='fb'+(hit==3&&!fp?'':' no');f.setAttribute('role','status');
+ f.innerHTML='<b>You found '+hit+' of 3 problems'+(fp?' and flagged '+fp+' sentence(s) that were fine':'')+'.</b><ul>'+li+'</ul><p class="note">Fine as written: ORS formulation and continued feeding. Always verify against current national or WHO guidance.</p>'};
+
+/* pledge */
+var L=['I will not enter identifiable patient information into tools my institution has not approved.','I will check doses, numbers and references against a trusted source before using them.','I will keep decisions about individual patients with me, not with AI.','I will tell the people who need to know when AI helped create something.','I will read everything in full before signing or sharing it.','I will ask for a second opinion from a colleague when the stakes are high.'];
+var pl=$('#pledge'),st=[];try{st=JSON.parse(localStorage.getItem('aif-pledge')||'[]')}catch(e){}
+var cnt=el('p','note','');
+L.forEach(function(t,i){var lb=el('label','chk'),c=document.createElement('input');c.type='checkbox';c.checked=st.indexOf(i)>-1;
+ c.onchange=function(){st=[];[].forEach.call(pl.querySelectorAll('input'),function(x,j){if(x.checked)st.push(j)});try{localStorage.setItem('aif-pledge',JSON.stringify(st))}catch(e){}show()};
+ lb.appendChild(c);lb.appendChild(el('span','',t));pl.appendChild(lb)});
+pl.appendChild(cnt);
+function show(){cnt.textContent=st.length+' of '+L.length+' commitments chosen.'}show();
+})();
+</script>
+</body>
+</html>
